@@ -16,8 +16,8 @@ ui <- bslib::page_fillable(
   ),
   
   ## theme
-  theme = bslib::bs_theme(version = 5, preset = 'flatly'),
-
+  theme = bslib::bs_theme(version = 5, bootswatch = 'flatly'),
+  
   ## main layout
   bslib::layout_sidebar(
     fillable = TRUE,
