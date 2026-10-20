@@ -1,0 +1,9 @@
+.Rproj.user
+*.Rproj
+.Rhistory
+.RData
+.Ruserdata
+R/
+data-raw/
+shiny/
+.git
