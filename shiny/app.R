@@ -3,11 +3,11 @@
 #####################
 
 ## load data
-atrazine_data <- readRDS('cleaned_atrazine_ia.rds') |>
-  dplyr::mutate(year_month = lubridate::floor_date(date, 'month'))
+atrazine_data <- readr::read_csv('cleaned_atrazine_ia.rds', show_col_types = FALSE) |>
+  dplyr::mutate(date = as.Date(date), year_month = lubridate::floor_date(date, 'month'))
 
 ## get IA outline
-iowa <- readRDS('iowa_boundary.rds')
+iowa <- paste(readLines('./shiny/iowa_boundary.geojson', warn = FALSE), collapse = '')
 
 ## bounding box
 bbox <- c(
@@ -135,7 +135,7 @@ server <- function(input, output, session) {
           baseGroups = c('USGS Topo', 'Satellite (Topo)'),
           options = leaflet::layersControlOptions(collapsed = FALSE)
         ) |>
-        leaflet::addPolygons(data = iowa, fillOpacity = 0.0, color = 'orange') |>
+        leaflet::addGeoJSON(geojson = iowa, color = 'orange', weight = 2, fill = FALSE) |> 
         leaflet::fitBounds(unname(bbox[1]), unname(bbox[2]), unname(bbox[3]), unname(bbox[4]))
   })
   
