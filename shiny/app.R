@@ -7,7 +7,7 @@ atrazine_data <- readr::read_csv('cleaned_atrazine_iowa.csv', show_col_types = F
   dplyr::mutate(date = as.Date(date), year_month = lubridate::floor_date(date, 'month'))
 
 ## get IA outline
-iowa <- paste(readLines('iowa_boundary.geojson', warn = FALSE), collapse = '')
+iowa_geojson <- paste(readLines('iowa_boundary.geojson', warn = FALSE), collapse = "\n")
 
 ## bounding box
 bbox <- c(
@@ -135,7 +135,7 @@ server <- function(input, output, session) {
           baseGroups = c('USGS Topo', 'Satellite (Topo)'),
           options = leaflet::layersControlOptions(collapsed = FALSE)
         ) |>
-        leaflet::addGeoJSON(geojson = iowa, color = 'orange', weight = 5, fill = FALSE) |> 
+        leaflet::addGeoJSON(geojson = iowa_geojson, color = 'orange', weight = 5, fill = FALSE) |> 
         leaflet::fitBounds(unname(bbox[1]), unname(bbox[2]), unname(bbox[3]), unname(bbox[4]))
   })
   
