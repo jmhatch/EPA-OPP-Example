@@ -11,7 +11,7 @@ This repository contains a functional, interactive dashboard designed as a work 
 ``` text
 shiny/
 ├── app.R                      
-├── cleaned_atrazine_iowa.rds    
+├── cleaned_atrazine_ia.rds    
 ├── iowa_boundary.rds             
 └── www/                       
 ```
