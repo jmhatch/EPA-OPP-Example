@@ -12,7 +12,6 @@ This repository contains a functional, interactive dashboard designed as a work 
 shiny/
 ├── app.R                      
 ├── cleaned_atrazine_iowa.csv    
-├── iowa_boundary.geojson             
 ```
 
 ------------------------------------------------------------------------
