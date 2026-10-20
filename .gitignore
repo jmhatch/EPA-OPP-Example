@@ -1,8 +1,9 @@
+.git
+.RData
+.Rhistory
 .Rproj.user
 *.Rproj
-.Rhistory
-.RData
 .Ruserdata
-R/
 data-raw/
-.git
+R/
+inst/

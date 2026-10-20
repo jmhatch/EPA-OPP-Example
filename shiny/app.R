@@ -3,17 +3,19 @@
 #####################
 
 ## load data
-atrazine_data <- here::here('cleaned_atrazine_ia.rds') |>
-  readr::read_rds() |>
+atrazine_data <- readRDS('cleaned_atrazine_ia.rds') |>
   dplyr::mutate(year_month = lubridate::floor_date(date, 'month'))
 
 ## get IA outline
-iowa <- here::here('iowa_boundary.rds') |>
-  readr::read_rds()
+iowa <- readRDS('iowa_boundary.rds')
 
 ## bounding box
-bbox <- iowa |>
-  sf::st_bbox()
+bbox <- c(
+  xmin = -96.63796,
+  ymin = 40.37952,
+  xmax = -90.14028,
+  ymax = 43.50096
+)
 
 ########
 ## UI ##
@@ -116,7 +118,6 @@ server <- function(input, output, session) {
   
   ## map
   output$water_map <- leaflet::renderLeaflet({
-    output$water_map <- leaflet::renderLeaflet({
       leaflet::leaflet() |>
         leaflet::addTiles(
           urlTemplate = 'https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}',
@@ -136,7 +137,6 @@ server <- function(input, output, session) {
         ) |>
         leaflet::addPolygons(data = iowa, fillOpacity = 0.0, color = 'orange') |>
         leaflet::fitBounds(unname(bbox[1]), unname(bbox[2]), unname(bbox[3]), unname(bbox[4]))
-    })
   })
   
   ## update map
@@ -163,7 +163,7 @@ server <- function(input, output, session) {
   ## time series
   output$trend_chart <- shiny::renderPlot({
     ggplot2::ggplot(trend_data(), ggplot2::aes(x = year_month, y = percent_exceed)) +
-      ggplot2::geom_line(color = 'darkgray', size = 1) +
+      ggplot2::geom_line(color = 'darkgray', linewidth = 1) +
       ggplot2::geom_point(color = 'black') +
       ggplot2::geom_vline(xintercept = as.Date(input$time_slider), color = 'red', linetype = 'dashed', size = 1) +
       ggplot2::theme_minimal() +
@@ -173,6 +173,7 @@ server <- function(input, output, session) {
       ) +
       ggplot2::theme(text = ggplot2::element_text(size = 14))
   })
+  
 }
 
 #########
