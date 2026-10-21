@@ -2,31 +2,13 @@
 ## Shiny dashboard ##
 #####################
 
-########
-## UI ##
-########
+library(shiny)
 
-ui <- bslib::page_fillable(
-  
-  ## header  
-  shiny::div(
-    class = 'p-3 bg-primary text-white',
-    shiny::h3('Surface Water Quality Conditions: Atrazine in Iowa'),
-    shiny::p('Tracking Estimated Environmental Concentrations (EECs) against EPA Aquatic Life Benchmarks.')
-  )
-  
+ui <- fluidPage(
+  h3("EPA Atrazine Dashboard Diagnostics"),
+  p("Testing WebR WASM boot sequence...")
 )
 
-############
-## Server ##
-############
-
-server <- function(input, output, session) {
-  
-}
-
-#########
-## App ##
-#########
+server <- function(input, output, session) {}
 
 shinyApp(ui, server)
