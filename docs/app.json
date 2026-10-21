@@ -1,1 +1,0 @@
-[{"name":"app.R","content":"#####################\r\n## Shiny dashboard ##\r\n#####################\r\n\r\nlibrary(shiny)\r\n\r\nui <- fluidPage(\r\n  h3(\"EPA Atrazine Dashboard Diagnostics\"),\r\n  p(\"Testing WebR WASM boot sequence...\")\r\n)\r\n\r\nserver <- function(input, output, session) {}\r\n\r\nshinyApp(ui, server)\r\n","type":"text"}]

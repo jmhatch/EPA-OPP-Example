@@ -6,4 +6,5 @@
 .Ruserdata
 data-raw/
 R/
+site/
 inst/
