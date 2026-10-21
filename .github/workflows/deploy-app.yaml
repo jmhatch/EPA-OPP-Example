@@ -24,13 +24,13 @@ jobs:
             sessioninfo
           cache-version: ${{ github.event.inputs.cache-version }}
 
-      - name: Find package dependencies
+      - name: Find app dependencies
         shell: Rscript {0}
         id: packages
         run: |
           # Find package dependencies using {renv} and install with {pak}
           pak::pak(
-            unique(renv::dependencies(".")$Package)
+            unique(renv::dependencies('.')$Package)
           )
 
       - name: Build app

@@ -161,10 +161,11 @@ server <- function(input, output, session) {
   
   ## time series
   output$trend_chart <- shiny::renderPlot({
+    selected_date <- lubridate::floor_date(as.Date(input$time_slider), 'month')
     ggplot2::ggplot(trend_data(), ggplot2::aes(x = year_month, y = percent_exceed)) +
       ggplot2::geom_line(color = 'darkgray', linewidth = 1) +
       ggplot2::geom_point(color = 'black') +
-      ggplot2::geom_vline(xintercept = as.Date(input$time_slider), color = 'red', linetype = 'dashed', size = 1) +
+      ggplot2::geom_vline(xintercept = selected_date, color = 'red', linetype = 'dashed', size = 1) +
       ggplot2::theme_minimal() +
       ggplot2::labs(
         x = 'Date',
